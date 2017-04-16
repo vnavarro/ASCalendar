@@ -21,7 +21,7 @@ class ASWeekVM : NSObject {
     
     //MARK: public methods
     
-    func getModelForIndex(index : Int, currentViewModel : ASDayVM?) -> ASDayVM? {
+    func getModelForIndex(_ index : Int, currentViewModel : ASDayVM?) -> ASDayVM? {
         let day = self.weekM.value.days[index]
         if (currentViewModel != nil) {
             currentViewModel?.dayM.value = day

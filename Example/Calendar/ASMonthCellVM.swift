@@ -21,7 +21,7 @@ class ASMonthVM : NSObject {
     
     //MARK: public Methods
     
-    func getWeekModel(week : ASWeekM, currentViewModel : ASWeekVM?) -> ASWeekVM?{
+    func getWeekModel(_ week : ASWeekM, currentViewModel : ASWeekVM?) -> ASWeekVM?{
         if (currentViewModel != nil) {
             currentViewModel!.weekM.value = week
             return nil

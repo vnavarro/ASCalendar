@@ -18,20 +18,20 @@ struct ASMonthM {
         self.month = month
         self.year = year
         //create a nsdate
-        let calendar = NSCalendar.currentCalendar()
+        var calendar = Calendar.current
         calendar.minimumDaysInFirstWeek = 7
-        let components = NSDateComponents()
+        var components = DateComponents()
         components.year = year
         components.month = month
         components.day = 1
-        let date = calendar.dateFromComponents(components)
+        let date = calendar.date(from: components)
         //calculate number of days in month
-        let range = calendar.rangeOfUnit(.Day, inUnit: .Month, forDate: date!)
+        let range = (calendar as NSCalendar).range(of: .day, in: .month, for: date!)
         let daysCount = range.length
         //find first day weekday
-        let myComponents = calendar.components([.Weekday, .WeekOfYear], fromDate: date!)
-        var weekNumber = myComponents.weekOfYear
-        var weekDay = myComponents.weekday
+        let myComponents = (calendar as NSCalendar).components([.weekday, .weekOfYear], from: date!)
+        var weekNumber = myComponents.weekOfYear!
+        var weekDay = myComponents.weekday!
         //switch to start by monday
         if (settings.startByMonday.value == true) {
             if weekDay == 1 {
@@ -76,14 +76,14 @@ struct ASMonthM {
             //check settings (selected days)
             currentDay.daySelected = false
             switch settings.selectionStyle.value {
-            case .Day :
+            case .day :
                 if (year == settings.selectedDay.value.dayYear &&
                     month == settings.selectedDay.value.dayMonth &&
                     i == settings.selectedDay.value.dayNumber)
                 {
                     currentDay.daySelected = true
                 }
-            case .Week :
+            case .week :
                 if (year == settings.selectedDay.value.dayYear &&
                     month == settings.selectedDay.value.dayMonth &&
                     weekNumber == settings.selectedDay.value.dayWeek)
